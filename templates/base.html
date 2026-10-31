@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}AI Complaints Priority System{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="{{ url_for('dashboard') if session.get('username') else url_for('login') }}"><span class="brand-icon">✦</span> AI Complaints <b>Priority System</b></a>
+{% if session.get('username') %}<nav><span class="welcome">Signed in as {{ session.get('username') }}</span><a class="logout" href="{{ url_for('logout') }}">Log out ↗</a></nav>{% endif %}</header>
+<main class="page">
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endif %}{% endwith %}
+{% block content %}{% endblock %}
+</main>
+<footer>AI Complaints Priority System <span>•</span> Demo project · Keyword-based priority estimate</footer>
+</body></html>
